@@ -1,5 +1,6 @@
 import React from 'react'
 import Form from './Form'
+import TodoList from './TodoList'
 
 export default class App extends React.Component {
 
@@ -10,7 +11,7 @@ export default class App extends React.Component {
         {
           name: 'Organize Garage',
           id: 1232423,
-          completed: false
+          completed: true
         },
       ],
       input: '',
@@ -35,10 +36,20 @@ export default class App extends React.Component {
     this.setState({input: ''})
   }
 
+  markComplete = (id) => {
+    this.setState(prevState => ({
+      todos: prevState.todos.map(todo =>
+        todo.id === id
+          ? { ...todo, completed: !todo.completed}
+          : todo
+      )
+    }))
+  }
+
   render() {
     return (
       <div>
-        Todo App
+        <TodoList todos={this.state.todos} markComplete={this.markComplete} />
         <Form handleChange={this.handleChange} value={this.state.input} submit={this.handleSubmit} />
       </div>
     )
