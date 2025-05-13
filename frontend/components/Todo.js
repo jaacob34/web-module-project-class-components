@@ -9,7 +9,7 @@ export default class Todo extends React.Component {
   render() {
     return (
       <div style={{paddingBottom: '.3em' }} >
-        <span onClick={() => this.props.markComplete(this.props.id)}>{this.props.todo} {this.props.completed && '✓'}</span>
+        {true && <span onClick={() => this.props.markComplete(this.props.id)}>{this.props.todo} {this.props.completed && '✓'}</span>}
       </div>
     )
   }

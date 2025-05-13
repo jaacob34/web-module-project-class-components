@@ -15,7 +15,8 @@ export default class App extends React.Component {
         },
       ],
       input: '',
-      disabled: true
+      disabled: true,
+      showCompleted: true
     }
   }
 
@@ -46,11 +47,27 @@ export default class App extends React.Component {
     }))
   }
 
+  showCompleted = () => {
+    this.setState({showCompleted: !this.state.showCompleted})
+  }
+
   render() {
     return (
       <div>
-        <TodoList todos={this.state.todos} markComplete={this.markComplete} />
-        <Form handleChange={this.handleChange} value={this.state.input} submit={this.handleSubmit} />
+        <TodoList 
+          todos={this.state.showCompleted
+            ? this.state.todos
+            : this.state.todos.filter(todo => !todo.completed)
+          } 
+          markComplete={this.markComplete} 
+        />
+        <Form 
+          handleChange={this.handleChange} 
+          value={this.state.input} 
+          submit={this.handleSubmit} 
+          showCompleted={this.showCompleted}
+          show={this.state.showCompleted}
+        />
       </div>
     )
   }
